@@ -4,6 +4,17 @@ import { User } from '../../types/user';
 import { Note } from '../../types/note';
 import { AxiosResponse } from "axios";
 
+export const fetchNote = async(id: string): Promise<Note> => {
+    const cookieStore = await cookies();
+    const res = await api.get<Note>(`/notes/${id}`, {
+        headers: {
+            Cookie: cookieStore.toString(),
+        },
+    });
+    return res.data;
+}
+
+
 export const getServerApi = async () => {
     const cookieStore = await cookies();
     const cookieHeader = cookieStore
