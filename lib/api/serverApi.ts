@@ -1,10 +1,11 @@
+'use server'
 import { cookies } from "next/headers";
 import { api } from './api';
 import { User } from '../../types/user';
 import { Note } from '../../types/note';
 import { AxiosResponse } from "axios";
 
-export const fetchNote = async(id: string): Promise<Note> => {
+export const fetchNotes = async(id: string): Promise<Note> => {
     const cookieStore = await cookies();
     const res = await api.get<Note>(`/notes/${id}`, {
         headers: {
